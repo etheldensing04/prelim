@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(226, 5, 178, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background-color: #ee5ab5; /* Dark background for header */
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e26af1;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f85af8; /* Light background for even rows */
+        }
+
+        .table tbody tr:hover {
+            background-color: #802f7b; /* Slightly darker hover effect */
+        }
+
+        .table tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eb9dda;
+        }
+
+        .table tbody td.tdId {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #fd6ffd;
+            border-color: #fd6ffd;
+        }
+
+        .btn-primary:hover {
+            background-color: #fdacf6;
+            border-color: #fdacf6;
+        }
+
+        .btn-danger {
+            background-color: #965171;
+            border-color: #965171;
+        }
+
+        .btn-danger:hover {
+            background-color: #e60b9d;
+            border-color: #e60b9d;
+        }
+
+        .btn-warning {
+            background-color: #bd71e9;
+            border-color: #bd71e9;
+        }
+
+        .btn-warning:hover {
+            background-color: #f5afe0;
+            border-color: #f5afe0;
+        }
+
+        .modal-header {
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #dee2e6;
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>List of Students</h1>
+    <button type="button" class="btn btn-primary" id="addBtn" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+        Add Student
+    </button>
+   
+    <div class="container mt-5">
+        <div class="row">
+            <table class="table table-light">
+                <thead class="thead-dark">
+                    <tr>
+                        
+                    <th scope="col">Assigned ID</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">School</th>
+                    <th scope="col">School Address</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Coordinator</th>
+                    <th scope="col">Organization</th>
+                    <th scope="col">Date_Started</th>
+                    <th scope="col">Action</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <template id="produtrowtemplate">
+                        <tr>
+                            <td class="tdId">id</td>
+                            <td class="student_name">Sname</td>
+                            <td class="skul">Sname</td>
+                            <td class="skuladd">SAdd</td>
+                            <td class="contak">connum</td>
+                            <td class="coord">coordinator</td>
+                            <td class="organi">Organization</td>
+                            <td class="age">DateStart</td>
+                            <td><button type="button" class="btn btn-danger" id="delete">Delete</button></td>
+                            <td>
+                                <button type="button" class="btn btn-warning edit-btn" data-bs-toggle="modal" data-bs-target="#editStudentModal">Edit</button>
+                            </td>
+                            
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addStudentForm">
+                        <div class="mb-3">
+                            <label for="student_name" class="form-label">Student Name</label>
+                            <input type="text" class="form-control" id="student_name" name="student_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="school" class="form-label">School Name</label>
+                            <input type="text" class="form-control" id="school" name="school" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="school_add" class="form-label">School Address</label>
+                            <input type="text" class="form-control" id="school_add" name="school_add" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact_no" class="form-label">Contact Number</label>
+                            <input type ="text" class="form-control" id="contact_no" name="contact_no">
+                                
+                        </div>
+                        <div class="mb-3">
+                            <label for="coordinator" class="form-label">Coordinator</label>
+                            <input type="text" class="form-control" id="coordinator" name="coordinator" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="organization" class="form-label">Organization</label>
+                            <input type="text" class="form-control" id="organization" name="organization" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Date Started</label>
+                            <input type="date" class="form-control" id="age" name="age" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Student</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- Edit Student Modal -->
+<div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editStudentModalLabel">Edit Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editStudentForm">
+                    <!-- Hidden input for student ID -->
+                    <input type="hidden" id="editStudentId" name="editStudentId">
+
+                    <div class="mb-3">
+                        <label for="editStudentName" class="form-label">Student Name</label>
+                        <input type="text" class="form-control" id="editStudentName" name="editStudentName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSchool" class="form-label">School</label>
+                        <input type="text" class="form-control" id="editSchool" name="editSchool" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSchoolAdd" class="form-label">School Address</label>
+                        <input type="text" class="form-control" id="editSchoolAdd" name="editSchoolAdd" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editContact" class="form-label">Contact Number</label>
+                        <input type="text" class="form-control" id="editContact" name="editContact">
+                            
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCoordinator" class="form-label">Coordinator</label>
+                        <input type="text" class="form-control" id="editCoordinator" name="editCoordinator" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editOrganization" class="form-label">Organization</label>
+                        <input type="text" class="form-control" id="editOrganization" name="editOrganization" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editBirthdate" class="form-label">Date Started</label>
+                        <input type="date" class="form-control" id="editBirthdate" name="editBirthdate" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Student</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
